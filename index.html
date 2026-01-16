@@ -1,1 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>SOUMYADEEP KUNDU</title>
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<style>
+body {top: 0; left: 0; width: 99%; height: 97%;
+    position: absolute; display: table}
+  p {display: table-cell; vertical-align: middle; text-align: center}
+#timezone * {text-decoration: none;}
 
+}
+</style>
+
+<script type="text/javascript">
+    // declare time zone formatting
+    let options = {
+        timeZone: 'Asia/India',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+    },
+    formatter = new Intl.DateTimeFormat([], options);
+
+    // set time
+    setInterval(
+        () => {
+            document.querySelector("#time").innerText = formatter.format(new Date());
+        }
+    , 1000)
+</script>
+</head>
+
+
+
+
+
+<p>
+<font size="7"><i><b>SOUMYADEEP KUNDU</b></i></font> <br>
+<br>
+<img src="https://i.imgur.com/zy8BRWw.png" style="width:560px;"><br>
+<br>
+<span id=timezone>
+<i>
+<a href="https://24timezones.com/india_time/">
+TIME IN INDIA
+</a> -
+<span id="time">0:00 PM</span>
+<a href="https://24timezones.com/time-zone/ist">IST</a>
+</i>
+</span>
+<br><br>
+
+<a href="http://jvscholz.com/about.html">about</a> //
+<a href="http://jvscholz.com/faq.html">faq</a> //
+<a href="http://jvscholz.com/blog/index.html">blog</a> //
+<a href="https://drive.google.com/file/d/17CnAyDkTUckt3jNoQjzsUmVlzP1jdp6t/view?usp=sharing">resume</a> //
+<a href="http://jvscholz.com/contact.html">contact</a>
+
+<br>
+<br>
+</body>
+</html>
