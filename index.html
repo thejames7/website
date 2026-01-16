@@ -2,72 +2,85 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Study — Minimal</title>
+  <title>SOUMYADEEP KUNDU</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
-    /* RESET */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       background: #000;
       color: #fff;
       font-family: "Times New Roman", serif;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
     .container {
-      text-align: center;
-      max-width: 900px;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 3rem;
+      max-width: 1200px;
       width: 100%;
+      padding: 2rem;
+    }
+
+    .left img {
+      width: 100%;
+      filter: grayscale(100%) contrast(120%);
+      opacity: 0.9;
+    }
+
+    .right {
+      text-align: center;
     }
 
     h1 {
-      font-size: 3.2rem;
-      font-weight: 700;
+      font-size: 3.4rem;
       letter-spacing: 3px;
-      margin-bottom: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .alias {
+      font-size: 1rem;
+      color: #888;
+      margin-bottom: 1.5rem;
+      font-style: italic;
     }
 
     .time {
-      font-size: 1.4rem;
-      font-style: italic;
+      font-size: 0.95rem;
       letter-spacing: 1px;
-      margin-bottom: 3rem;
-      color: #ccc;
+      color: #aaa;
+      margin-bottom: 2rem;
+    }
+
+    .desk-img {
+      width: 80%;
+      margin: 0 auto 2.5rem;
+      display: block;
+      filter: grayscale(100%) contrast(115%);
     }
 
     nav a {
       color: #fff;
       text-decoration: none;
-      font-size: 1.2rem;
-      margin: 0 0.6rem;
-      transition: opacity 0.2s ease;
-    }
-
-    nav a:hover {
-      opacity: 0.6;
-    }
-
-    .divider {
+      font-size: 1.1rem;
       margin: 0 0.4rem;
-      color: #777;
     }
+
+    nav a:hover { opacity: 0.6; }
+
+    .divider { color: #666; margin: 0 0.3rem; }
 
     footer {
-      margin-top: 4rem;
-      font-size: 0.9rem;
-      color: #666;
+      margin-top: 3rem;
+      font-size: 0.85rem;
+      color: #555;
     }
 
-    /* subtle grain */
     body::after {
       content: "";
       position: fixed;
@@ -87,7 +100,6 @@
         second: "2-digit",
         hour12: true
       }).format(now);
-
       document.getElementById("time").innerText = time;
     }
 
@@ -98,23 +110,32 @@
 <body>
 
   <div class="container">
-    <h1>TIME IN INDIA</h1>
 
-    <div class="time">
-      <span id="time">00:00:00 PM</span> IST
+    <div class="left">
+      <img src="/mnt/data/F7923858-D9AD-4604-AFF1-4468AB001F6B.png" alt="blueprint flower" />
     </div>
 
-    <nav>
-      <a href="#">about</a><span class="divider">//</span>
-      <a href="#">faq</a><span class="divider">//</span>
-      <a href="#">blog</a><span class="divider">//</span>
-      <a href="#">resume</a><span class="divider">//</span>
-      <a href="#">contact</a>
-    </nav>
+    <div class="right">
+      <h1>SOUMYADEEP KUNDU</h1>
+      <div class="alias">aka James</div>
 
-    <footer>
-      focused. quiet. consistent.
-    </footer>
+      <div class="time">TIME IN INDIA — <span id="time">00:00:00 PM</span> IST</div>
+
+      <img class="desk-img" src="/mnt/data/2E9B3DA7-EAB0-4D41-9869-D04DBDE0E5ED.png" alt="study desk" />
+
+      <nav>
+        <a href="#">about</a><span class="divider">//</span>
+        <a href="#">faq</a><span class="divider">//</span>
+        <a href="#">blog</a><span class="divider">//</span>
+        <a href="#">resume</a><span class="divider">//</span>
+        <a href="#">contact</a>
+      </nav>
+
+      <footer>
+        quiet discipline. long focus.
+      </footer>
+    </div>
+
   </div>
 
 </body>
