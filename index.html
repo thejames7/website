@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>SOUMYADEEP KUNDU</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
       background: #000;
@@ -29,6 +33,9 @@
 
     .left img {
       width: 100%;
+      max-width: 420px;
+      display: block;
+      margin: 0 auto;
       filter: grayscale(100%) contrast(120%);
       opacity: 0.9;
     }
@@ -40,13 +47,13 @@
     h1 {
       font-size: 3.4rem;
       letter-spacing: 3px;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
     }
 
     .alias {
       font-size: 1rem;
       color: #888;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.2rem;
       font-style: italic;
     }
 
@@ -58,10 +65,13 @@
     }
 
     .desk-img {
-      width: 80%;
-      margin: 0 auto 2.5rem;
+      width: 100%;
+      max-width: 260px;
+      height: auto;
       display: block;
+      margin: 1.5rem auto 2.5rem;
       filter: grayscale(100%) contrast(115%);
+      opacity: 0.9;
     }
 
     nav a {
@@ -71,9 +81,14 @@
       margin: 0 0.4rem;
     }
 
-    nav a:hover { opacity: 0.6; }
+    nav a:hover {
+      opacity: 0.6;
+    }
 
-    .divider { color: #666; margin: 0 0.3rem; }
+    .divider {
+      color: #666;
+      margin: 0 0.3rem;
+    }
 
     footer {
       margin-top: 3rem;
@@ -100,6 +115,7 @@
         second: "2-digit",
         hour12: true
       }).format(now);
+
       document.getElementById("time").innerText = time;
     }
 
@@ -107,23 +123,25 @@
     window.onload = updateTime;
   </script>
 </head>
+
 <body>
 
   <div class="container">
 
     <div class="left">
-    <img src="assets/images/flower.png" alt="blueprint flower">
+      <img src="assets/images/flower.png" alt="blueprint flower">
     </div>
 
     <div class="right">
       <h1>SOUMYADEEP KUNDU</h1>
       <div class="alias">aka James</div>
 
-      <div class="time">TIME IN INDIA — <span id="time">00:00:00 PM</span> IST</div>
+      <div class="time">
+        TIME IN INDIA — <span id="time">00:00:00 PM</span> IST
+      </div>
 
-      <img src="assets/images/setup.jpg"
-     alt="study desk"
-     style="width:40%; max-width:300px;">
+      <img src="assets/images/setup.jpg" alt="study setup" class="desk-img">
+
       <nav>
         <a href="#">about</a><span class="divider">//</span>
         <a href="#">faq</a><span class="divider">//</span>
