@@ -1,202 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>SOUMYADEEP KUNDU</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>SOUMYADEEP KUNDU</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-    body {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+body{
+  font-family:"Times New Roman",serif;
+  color:white;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  background:#000;
+}
 
-      font-family: "Times New Roman", serif;
-      color: #ffffff;
+/* 🌌 COSMIC BACKGROUND LAYERS */
 
-      background: radial-gradient(circle at 20% 30%, #1a1a2e 0%, transparent 40%),
-                  radial-gradient(circle at 80% 70%, #16213e 0%, transparent 40%),
-                  radial-gradient(circle at 50% 50%, #0f3460 0%, #000814 70%);
-      background-blend-mode: screen;
-      animation: bgMove 12s ease-in-out infinite alternate;
-      overflow: hidden;
-    }
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 30% 40%, rgba(90,0,255,0.35), transparent 50%),
+    radial-gradient(circle at 70% 60%, rgba(0,150,255,0.25), transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(255,0,150,0.15), transparent 60%);
+  animation: nebulaMove 20s ease-in-out infinite alternate;
+  z-index:-2;
+}
 
-    @keyframes bgMove {
-      0% {
-        background-position: 20% 30%, 80% 70%, 50% 50%;
-      }
-      100% {
-        background-position: 25% 35%, 75% 65%, 50% 55%;
-      }
-    }
+/* ✨ STAR FIELD */
 
-    .container {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 3rem;
-      max-width: 1200px;
-      width: 100%;
-      padding: 3rem;
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image:
+    radial-gradient(2px 2px at 20% 30%, white, transparent),
+    radial-gradient(1px 1px at 70% 80%, white, transparent),
+    radial-gradient(1.5px 1.5px at 40% 60%, white, transparent),
+    radial-gradient(2px 2px at 85% 25%, white, transparent),
+    radial-gradient(1px 1px at 10% 90%, white, transparent);
+  background-repeat:repeat;
+  background-size:300px 300px;
+  animation: starsMove 60s linear infinite;
+  opacity:0.6;
+  z-index:-1;
+}
 
-      backdrop-filter: blur(18px);
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 20px;
-      box-shadow: 0 0 60px rgba(0, 0, 0, 0.8);
-    }
+@keyframes nebulaMove{
+  0%{transform:scale(1) translate(0,0);}
+  100%{transform:scale(1.1) translate(-40px,20px);}
+}
 
-    .left img {
-      width: 100%;
-      max-width: 420px;
-      display: block;
-      margin: 0 auto;
-      filter: grayscale(100%) contrast(120%);
-      opacity: 0.9;
-    }
+@keyframes starsMove{
+  from{background-position:0 0;}
+  to{background-position:0 1000px;}
+}
 
-    .right {
-      text-align: center;
-    }
+/* 🌫 GLASS CONTAINER */
 
-    h1 {
-      font-size: 3.4rem;
-      letter-spacing: 3px;
-      margin-bottom: 0.4rem;
-    }
+.container{
+  display:grid;
+  grid-template-columns:1fr 2fr;
+  gap:3rem;
+  max-width:1200px;
+  width:100%;
+  padding:3rem;
+  backdrop-filter:blur(25px);
+  background:rgba(10,10,20,0.35);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:24px;
+  box-shadow:0 0 80px rgba(0,0,0,0.8);
+}
 
-    .alias {
-      font-size: 1rem;
-      color: #aaa;
-      margin-bottom: 1.2rem;
-      font-style: italic;
-    }
+/* LEFT IMAGE */
 
-    .time {
-      font-size: 0.95rem;
-      letter-spacing: 1px;
-      color: #ccc;
-      margin-bottom: 2rem;
-    }
+.left img{
+  width:100%;
+  max-width:420px;
+  margin:auto;
+  display:block;
+  filter:grayscale(100%) contrast(120%);
+  opacity:0.9;
+}
 
-    .desk-img {
-      width: 40%;
-      max-width: 220px;
-      height: auto;
-      display: block;
-      margin: 1.5rem auto 2.5rem;
-      filter: grayscale(100%) contrast(115%);
-      opacity: 0.9;
-    }
+/* RIGHT SIDE */
 
-    nav a {
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 1.1rem;
-      margin: 0 0.4rem;
-      transition: 0.3s ease;
-    }
+.right{
+  text-align:center;
+}
 
-    nav a:hover {
-      opacity: 0.6;
-    }
+h1{
+  font-size:3.5rem;
+  letter-spacing:4px;
+  margin-bottom:0.5rem;
+}
 
-    .divider {
-      color: #666;
-      margin: 0 0.3rem;
-    }
+.alias{
+  font-style:italic;
+  color:#aaa;
+  margin-bottom:1.5rem;
+}
 
-    footer {
-      margin-top: 3rem;
-      font-size: 0.85rem;
-      color: #888;
-      letter-spacing: 1px;
-    }
+.time{
+  font-size:0.95rem;
+  letter-spacing:1px;
+  color:#ccc;
+  margin-bottom:2rem;
+}
 
-    /* subtle grain overlay */
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-    }
+.desk-img{
+  width:40%;
+  max-width:220px;
+  margin:1.5rem auto 2.5rem;
+  display:block;
+  filter:grayscale(100%) contrast(115%);
+  opacity:0.9;
+}
 
-    /* Responsive */
-    @media (max-width: 900px) {
-      .container {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
+/* NAV */
 
-      .left img {
-        max-width: 280px;
-      }
-    }
+nav a{
+  color:white;
+  text-decoration:none;
+  font-size:1.1rem;
+  margin:0 0.5rem;
+  transition:0.3s;
+}
 
-  </style>
+nav a:hover{
+  color:#9c6bff;
+}
 
-  <script>
-    function updateTime() {
-      const now = new Date();
-      const time = new Intl.DateTimeFormat("en-IN", {
-        timeZone: "Asia/Kolkata",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: true
-      }).format(now);
+.divider{
+  color:#555;
+}
 
-      document.getElementById("time").innerText = time;
-    }
+/* FOOTER */
 
-    setInterval(updateTime, 1000);
-    window.onload = updateTime;
-  </script>
+footer{
+  margin-top:3rem;
+  font-size:0.85rem;
+  color:#888;
+  letter-spacing:1px;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+  .container{
+    grid-template-columns:1fr;
+    text-align:center;
+  }
+  .left img{
+    max-width:260px;
+  }
+}
+
+</style>
+
+<script>
+function updateTime(){
+  const now=new Date();
+  const time=new Intl.DateTimeFormat("en-IN",{
+    timeZone:"Asia/Kolkata",
+    hour:"2-digit",
+    minute:"2-digit",
+    second:"2-digit",
+    hour12:true
+  }).format(now);
+  document.getElementById("time").innerText=time;
+}
+setInterval(updateTime,1000);
+window.onload=updateTime;
+</script>
 
 </head>
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <div class="left">
-      <img src="assets/images/flower.png" alt="blueprint flower">
-    </div>
+<div class="left">
+<img src="assets/images/flower.png" alt="blueprint flower">
+</div>
 
-    <div class="right">
-      <h1>SOUMYADEEP KUNDU</h1>
-      <div class="alias">aka James</div>
+<div class="right">
+<h1>SOUMYADEEP KUNDU</h1>
+<div class="alias">aka James</div>
 
-      <div class="time">
-        TIME IN INDIA — <span id="time">00:00:00 PM</span> IST
-      </div>
+<div class="time">
+TIME IN INDIA — <span id="time">00:00:00 PM</span> IST
+</div>
 
-      <img src="assets/images/setup.jpg"
-           alt="study desk"
-           class="desk-img">
+<img src="assets/images/setup.jpg" alt="study desk" class="desk-img">
 
-      <nav>
-        <a href="about.html">about</a>
-        <span class="divider">//</span>
-        <a href="faq.html">faq</a>
-        <span class="divider">//</span>
-        <a href="contact.html">contact</a>
-      </nav>
+<nav>
+<a href="about.html">about</a>
+<span class="divider">//</span>
+<a href="faq.html">faq</a>
+<span class="divider">//</span>
+<a href="contact.html">contact</a>
+</nav>
 
-      <footer>
-        quiet discipline. long focus.
-      </footer>
-    </div>
+<footer>
+quiet discipline. long focus.
+</footer>
 
-  </div>
+</div>
+
+</div>
 
 </body>
 </html>
