@@ -5,105 +5,244 @@
   <title>Contact — Soumyadeep Kundu</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cinzel:wght@400;600&family=Cormorant+Garamond:wght@300;400;500&family=Space+Mono&display=swap" rel="stylesheet">
+
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
     }
 
-    body {
-      background: #000;
-      color: #fff;
-      font-family: "Times New Roman", serif;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
+    html,body{
+      height:100%;
     }
 
-    .container {
-      max-width: 700px;
-      width: 100%;
-      padding: 2.5rem;
+    body{
+      background:#000;
+      color:#e8e0d5;
+      font-family:'Cormorant Garamond', serif;
+      overflow:hidden;
     }
 
-    h1 {
-      font-size: 2.8rem;
-      letter-spacing: 2px;
-      margin-bottom: 2.5rem;
+    /* background */
+    .bg{
+      position:fixed;
+      inset:0;
+      z-index:0;
+      background:
+      linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.88),
+        rgba(0,0,0,0.95)
+      ),
+      url('assets/images/castle.png');
+      background-size:cover;
+      background-position:center top;
     }
 
-    p {
-      font-size: 1.05rem;
-      line-height: 1.7;
-      color: #ddd;
-      margin-bottom: 2.2rem;
+    /* grain */
+    .grain{
+      position:fixed;
+      inset:0;
+      z-index:1;
+      pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
     }
 
-    .label {
-      color: #aaa;
-      letter-spacing: 1px;
-      margin-bottom: 0.4rem;
+    /* nav */
+    .top-nav{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      z-index:10;
+      display:flex;
+      justify-content:center;
+      gap:3rem;
+      padding:1.4rem 2rem;
+      border-bottom:1px solid rgba(255,255,255,0.06);
+      background:linear-gradient(to bottom, rgba(0,0,0,0.6), transparent);
     }
 
-    .spotify {
-      display: inline-block;
-      margin-top: 1.2rem;
-      padding: 0.6rem 1.4rem;
-      border: 1px solid #fff;
-      font-size: 1.05rem;
-      letter-spacing: 1px;
-      text-decoration: none;
-      color: #fff;
+    .top-nav a{
+      font-family:'Space Mono', monospace;
+      font-size:0.6rem;
+      letter-spacing:0.25em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,0.45);
+      text-decoration:none;
+      transition:0.25s;
     }
 
-    .spotify:hover {
-      background: #fff;
-      color: #000;
+    .top-nav a:hover{
+      color:#c4614a;
     }
 
-    .back {
-      display: inline-block;
-      margin-top: 3.5rem;
-      color: #aaa;
-      text-decoration: none;
-      font-size: 0.95rem;
-      letter-spacing: 1px;
+    /* page */
+    .page{
+      position:relative;
+      z-index:2;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:5rem 1rem;
+      animation:fade 1s ease;
     }
 
-    .back:hover {
-      opacity: 0.6;
+    @keyframes fade{
+      from{
+        opacity:0;
+        transform:translateY(10px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
     }
 
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
+    .container{
+      width:100%;
+      max-width:700px;
+      text-align:center;
     }
+
+    h1{
+      font-family:'Cinzel', serif;
+      font-size:clamp(3rem,8vw,5rem);
+      letter-spacing:0.08em;
+      margin-bottom:2.5rem;
+      color:#f0e7dc;
+      text-shadow:0 0 30px rgba(196,97,74,0.12);
+    }
+
+    .desc{
+      max-width:560px;
+      margin:0 auto 3rem;
+      line-height:1.9;
+      font-size:1.05rem;
+      color:rgba(255,255,255,0.62);
+    }
+
+    .label{
+      font-family:'Space Mono', monospace;
+      text-transform:uppercase;
+      letter-spacing:0.18em;
+      font-size:0.7rem;
+      color:rgba(255,255,255,0.35);
+      margin-bottom:0.8rem;
+    }
+
+    .email{
+      font-size:1.2rem;
+      font-style:italic;
+      color:#f0e7dc;
+      margin-bottom:3rem;
+    }
+
+    .spotify{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      padding:0.9rem 2rem;
+      border:1px solid rgba(255,255,255,0.25);
+      color:#f0e7dc;
+      font-family:'Space Mono', monospace;
+      font-size:0.72rem;
+      letter-spacing:0.22em;
+      text-transform:uppercase;
+      transition:0.3s;
+      margin-bottom:3rem;
+    }
+
+    .spotify:hover{
+      border-color:#c4614a;
+      color:#c4614a;
+      background:rgba(196,97,74,0.05);
+    }
+
+    .back-link{
+      display:inline-flex;
+      align-items:center;
+      gap:0.6rem;
+      text-decoration:none;
+      color:rgba(255,255,255,0.35);
+      font-family:'Space Mono', monospace;
+      font-size:0.65rem;
+      letter-spacing:0.22em;
+      text-transform:uppercase;
+      transition:0.25s;
+    }
+
+    .back-link::before{
+      content:'←';
+    }
+
+    .back-link:hover{
+      color:#c4614a;
+    }
+
+    @media(max-width:700px){
+
+      body{
+        overflow:auto;
+      }
+
+      .top-nav{
+        gap:1.4rem;
+      }
+
+      h1{
+        margin-bottom:2rem;
+      }
+
+      .email{
+        font-size:1rem;
+      }
+    }
+
   </style>
 </head>
 
 <body>
 
+<div class="bg"></div>
+<div class="grain"></div>
+
+<!-- nav -->
+<nav class="top-nav">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="faq.html">FAQ</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<!-- page -->
+<div class="page">
+
   <div class="container">
 
     <h1>CONTACT</h1>
 
-    <p>
-      I'll only respond to those proposals that are a good match for my schedule
-      and interests. thank you
-    </p>
+    <div class="desc">
+      I'll only respond to those proposals that are a good match
+      for my schedule and interests.
+      thank you
+    </div>
 
     <div class="label">e-mail</div>
-    <p>
-      <i>thesoumyadeepkundu@gmail.com</i>
-    </p>
 
-    <a 
+    <div class="email">
+      thesoumyadeepkundu@gmail.com
+    </div>
+
+    <a
       href="https://open.spotify.com/user/31zhx4n2wct7k6ose2zkhyue2mx4"
       target="_blank"
       class="spotify"
@@ -113,9 +252,11 @@
 
     <br>
 
-    <a href="index.html" class="back">← back</a>
+    <a href="index.html" class="back-link">back</a>
 
   </div>
+
+</div>
 
 </body>
 </html>
