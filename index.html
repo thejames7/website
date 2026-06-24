@@ -4,157 +4,408 @@
   <meta charset="UTF-8">
   <title>SOUMYADEEP KUNDU</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&family=Space+Mono&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html, body { height:100%; }
 
     body {
       background: #000;
-      color: #fff;
-      font-family: "Times New Roman", serif;
+      color: #e8e0d5;
+      font-family: 'Cormorant Garamond', Georgia, serif;
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      overflow-x: hidden;
     }
 
-    .container {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 3rem;
-      max-width: 1200px;
-      width: 100%;
-      padding: 2rem;
-    }
-
-    .left img {
-      width: 100%;
-      max-width: 420px;
-      display: block;
-      margin: 0 auto;
-      filter: grayscale(100%) contrast(120%);
-      opacity: 0.9;
-    }
-
-    .right {
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 3.4rem;
-      letter-spacing: 3px;
-      margin-bottom: 0.4rem;
-    }
-
-    .alias {
-      font-size: 1rem;
-      color: #888;
-      margin-bottom: 1.2rem;
-      font-style: italic;
-    }
-
-    .time {
-      font-size: 0.95rem;
-      letter-spacing: 1px;
-      color: #aaa;
-      margin-bottom: 2rem;
-    }
-
-    .desk-img {
-      width: 100%;
-      max-width: 260px;
-      height: auto;
-      display: block;
-      margin: 1.5rem auto 2.5rem;
-      filter: grayscale(100%) contrast(115%);
-      opacity: 0.9;
-    }
-
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 1.1rem;
-      margin: 0 0.4rem;
-    }
-
-    nav a:hover {
-      opacity: 0.6;
-    }
-
-    .divider {
-      color: #666;
-      margin: 0 0.3rem;
-    }
-
-    footer {
-      margin-top: 3rem;
-      font-size: 0.90rem;
-      color: #F5F5F5;
-    }
-
-    body::after {
-      content: "";
+    /* ── CASTLE BACKGROUND ── */
+    .bg {
       position: fixed;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      background-image: url('assets/images/castle.png');
+      /* 
+        IMAGE: Place the dark castle image at assets/images/castle.png
+        (the foggy gothic castle you uploaded)
+      */
+      background-size: cover;
+      background-position: center top;
+      z-index: 0;
+    }
+    /* heavy dark overlay so text is readable */
+    .bg::after {
+      content:'';
+      position:absolute; inset:0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.72) 0%,
+        rgba(0,0,0,0.55) 40%,
+        rgba(0,0,0,0.80) 80%,
+        rgba(0,0,0,0.97) 100%
+      );
+    }
+
+    /* ── GRAIN ── */
+    .grain {
+      position:fixed; inset:0; z-index:1; pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    }
+
+    /* ── PAGE WRAPPER ── */
+    .page {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1rem;
+      animation: rise 1.4s ease both;
+    }
+    @keyframes rise {
+      from { opacity:0; transform:translateY(16px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    /* ══════════════════════════════
+       GOTHIC ORNAMENTS — SIDE PANELS
+       These are pure SVG/CSS, no images
+    ══════════════════════════════ */
+    .orn-left, .orn-right {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 72px;
+      z-index: 3;
       pointer-events: none;
+      opacity: 0.55;
+    }
+    .orn-left  { left: 0; }
+    .orn-right { right: 0; transform: translateY(-50%) scaleX(-1); }
+
+    .orn-left svg, .orn-right svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ══════════════════════════════
+       NAV — TOP
+    ══════════════════════════════ */
+    .top-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      padding: 1.4rem 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent);
+    }
+    .top-nav a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+    .top-nav a:hover { color: #c4614a; }
+
+    /* ══════════════════════════════
+       CENTRE CONTENT
+    ══════════════════════════════ */
+    .centre {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      max-width: 680px;
+      width: 100%;
+    }
+
+    /* small top ornament */
+    .top-glyph {
+      margin-bottom: 1.8rem;
+      opacity: 0.5;
+    }
+    .top-glyph svg { width: 40px; height: 40px; }
+
+    /* ── MAIN NAME ── */
+    .name-gothic {
+      font-family: 'UnifrakturMaguntia', cursive;
+      font-size: clamp(2.8rem, 9vw, 7rem);
+      line-height: 1;
+      letter-spacing: 0.04em;
+      color: #e8e0d5;
+      text-shadow:
+        0 0 40px rgba(196,97,74,0.25),
+        0 2px 8px rgba(0,0,0,0.9);
+      margin-bottom: 0.2rem;
+    }
+
+    /* subtitle in cinzel */
+    .name-sub {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.7rem, 2vw, 1rem);
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 1.6rem;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto 1.6rem;
+    }
+    .div-line {
+      flex:1; height:1px;
+      background: linear-gradient(90deg, transparent, rgba(196,97,74,0.4), transparent);
+    }
+    .div-diamond {
+      width: 5px; height: 5px;
+      background: rgba(196,97,74,0.6);
+      transform: rotate(45deg);
+    }
+
+    /* ── ALIAS ── */
+    .alias {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.12em;
+      margin-bottom: 2.2rem;
+    }
+
+    /* ── TIME ── */
+    .time-block {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 2.8rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 0.5rem 1.2rem;
+      background: rgba(0,0,0,0.35);
+    }
+    .time-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+    }
+    .time-val {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      color: #4a6fa5;
+    }
+
+    /* ── NAV BUTTONS ── */
+    .nav-row {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 3rem;
+    }
+    .nav-row a {
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      padding: 0.6rem 1.6rem;
+      border: 1px solid rgba(255,255,255,0.1);
+      margin-right: -1px;
+      transition: color 0.25s, border-color 0.25s, background 0.25s;
+      background: rgba(0,0,0,0.3);
+    }
+    .nav-row a:hover {
+      color: #e8e0d5;
+      border-color: rgba(196,97,74,0.5);
+      background: rgba(196,97,74,0.08);
+      z-index: 1;
+      position: relative;
+    }
+
+    /* ── QUOTE ── */
+    .quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(0.85rem, 2vw, 1.05rem);
+      color: rgba(255,255,255,0.28);
+      letter-spacing: 0.08em;
+    }
+
+    /* ── BOTTOM GLYPH ── */
+    .bottom-glyph {
+      margin-top: 1.8rem;
+      opacity: 0.35;
+    }
+    .bottom-glyph svg { width: 30px; height: 30px; }
+
+    /* ══ RESPONSIVE ══ */
+    @media (max-width: 600px) {
+      .orn-left, .orn-right { width: 38px; opacity: 0.35; }
+      .top-nav { gap: 1.5rem; }
+      .page { padding: 5rem 0.5rem 3rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .page { animation: none; }
     }
   </style>
-
-  <script>
-    function updateTime() {
-      const now = new Date();
-      const time = new Intl.DateTimeFormat("en-IN", {
-        timeZone: "Asia/Kolkata",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: true
-      }).format(now);
-
-      document.getElementById("time").innerText = time;
-    }
-
-    setInterval(updateTime, 1000);
-    window.onload = updateTime;
-  </script>
 </head>
-
 <body>
 
-  <div class="container">
+<!-- castle background -->
+<div class="bg"></div>
+<div class="grain"></div>
 
-    <div class="left">
-      <img src="assets/images/flower.png" alt="blueprint flower">
+<!-- ── GOTHIC SIDE ORNAMENTS ── -->
+<!-- Left ornament -->
+<div class="orn-left">
+  <svg viewBox="0 0 72 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- vertical spine -->
+    <line x1="36" y1="0" x2="36" y2="420" stroke="#8B1A1A" stroke-width="0.8" opacity="0.6"/>
+    <!-- top spire -->
+    <path d="M36 10 L30 30 L36 24 L42 30 Z" fill="#8B1A1A" opacity="0.7"/>
+    <path d="M36 10 L36 0" stroke="#8B1A1A" stroke-width="1" opacity="0.5"/>
+    <!-- upper wing flourish -->
+    <path d="M36 70 C20 60, 8 75, 10 90 C12 105, 28 100, 36 95" stroke="#c4614a" stroke-width="1" fill="none" opacity="0.6"/>
+    <path d="M36 70 C52 60, 64 75, 62 90 C60 105, 44 100, 36 95" stroke="#c4614a" stroke-width="1" fill="none" opacity="0.6"/>
+    <!-- upper center diamond -->
+    <rect x="32" y="98" width="8" height="8" transform="rotate(45 36 102)" fill="none" stroke="#c4614a" stroke-width="0.8" opacity="0.7"/>
+    <circle cx="36" cy="102" r="1.5" fill="#c4614a" opacity="0.7"/>
+    <!-- mid flourish -->
+    <path d="M36 175 C18 165, 4 185, 8 205 C12 222, 30 218, 36 210" stroke="#8B1A1A" stroke-width="1.2" fill="none" opacity="0.55"/>
+    <path d="M36 175 C54 165, 68 185, 64 205 C60 222, 42 218, 36 210" stroke="#8B1A1A" stroke-width="1.2" fill="none" opacity="0.55"/>
+    <!-- mid cross ornament -->
+    <line x1="20" y1="210" x2="52" y2="210" stroke="#c4614a" stroke-width="0.7" opacity="0.5"/>
+    <path d="M28 210 L36 200 L44 210 L36 220 Z" fill="none" stroke="#c4614a" stroke-width="0.7" opacity="0.5"/>
+    <circle cx="36" cy="210" r="1.5" fill="#c4614a" opacity="0.6"/>
+    <!-- lower wing -->
+    <path d="M36 280 C20 270, 6 288, 10 308 C14 325, 30 318, 36 310" stroke="#8B1A1A" stroke-width="1" fill="none" opacity="0.5"/>
+    <path d="M36 280 C52 270, 66 288, 62 308 C58 325, 42 318, 36 310" stroke="#8B1A1A" stroke-width="1" fill="none" opacity="0.5"/>
+    <!-- lower diamond -->
+    <rect x="32" y="310" width="8" height="8" transform="rotate(45 36 314)" fill="none" stroke="#c4614a" stroke-width="0.8" opacity="0.6"/>
+    <circle cx="36" cy="314" r="1.5" fill="#c4614a" opacity="0.6"/>
+    <!-- bottom spire (inverted) -->
+    <path d="M36 410 L30 390 L36 396 L42 390 Z" fill="#8B1A1A" opacity="0.7"/>
+    <!-- small ticks on spine -->
+    <line x1="32" y1="140" x2="40" y2="140" stroke="#c4614a" stroke-width="0.6" opacity="0.4"/>
+    <line x1="32" y1="245" x2="40" y2="245" stroke="#c4614a" stroke-width="0.6" opacity="0.4"/>
+    <line x1="32" y1="350" x2="40" y2="350" stroke="#c4614a" stroke-width="0.6" opacity="0.4"/>
+  </svg>
+</div>
+
+<!-- Right ornament (mirrored via CSS scaleX) -->
+<div class="orn-right">
+  <svg viewBox="0 0 72 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <line x1="36" y1="0" x2="36" y2="420" stroke="#8B1A1A" stroke-width="0.8" opacity="0.6"/>
+    <path d="M36 10 L30 30 L36 24 L42 30 Z" fill="#8B1A1A" opacity="0.7"/>
+    <path d="M36 10 L36 0" stroke="#8B1A1A" stroke-width="1" opacity="0.5"/>
+    <path d="M36 70 C20 60, 8 75, 10 90 C12 105, 28 100, 36 95" stroke="#c4614a" stroke-width="1" fill="none" opacity="0.6"/>
+    <path d="M36 70 C52 60, 64 75, 62 90 C60 105, 44 100, 36 95" stroke="#c4614a" stroke-width="1" fill="none" opacity="0.6"/>
+    <rect x="32" y="98" width="8" height="8" transform="rotate(45 36 102)" fill="none" stroke="#c4614a" stroke-width="0.8" opacity="0.7"/>
+    <circle cx="36" cy="102" r="1.5" fill="#c4614a" opacity="0.7"/>
+    <path d="M36 175 C18 165, 4 185, 8 205 C12 222, 30 218, 36 210" stroke="#8B1A1A" stroke-width="1.2" fill="none" opacity="0.55"/>
+    <path d="M36 175 C54 165, 68 185, 64 205 C60 222, 42 218, 36 210" stroke="#8B1A1A" stroke-width="1.2" fill="none" opacity="0.55"/>
+    <line x1="20" y1="210" x2="52" y2="210" stroke="#c4614a" stroke-width="0.7" opacity="0.5"/>
+    <path d="M28 210 L36 200 L44 210 L36 220 Z" fill="none" stroke="#c4614a" stroke-width="0.7" opacity="0.5"/>
+    <circle cx="36" cy="210" r="1.5" fill="#c4614a" opacity="0.6"/>
+    <path d="M36 280 C20 270, 6 288, 10 308 C14 325, 30 318, 36 310" stroke="#8B1A1A" stroke-width="1" fill="none" opacity="0.5"/>
+    <path d="M36 280 C52 270, 66 288, 62 308 C58 325, 42 318, 36 310" stroke="#8B1A1A" stroke-width="1" fill="none" opacity="0.5"/>
+    <rect x="32" y="310" width="8" height="8" transform="rotate(45 36 314)" fill="none" stroke="#c4614a" stroke-width="0.8" opacity="0.6"/>
+    <circle cx="36" cy="314" r="1.5" fill="#c4614a" opacity="0.6"/>
+    <path d="M36 410 L30 390 L36 396 L42 390 Z" fill="#8B1A1A" opacity="0.7"/>
+    <line x1="32" y1="140" x2="40" y2="140" stroke="#c4614a" stroke-width="0.6" opacity="0.4"/>
+    <line x1="32" y1="245" x2="40" y2="245" stroke="#c4614a" stroke-width="0.6" opacity="0.4"/>
+    <line x1="32" y1="350" x2="40" y2="350" stroke="#c4614a" stroke-width="0.6" opacity="0.4"/>
+  </svg>
+</div>
+
+<!-- ── TOP NAV ── -->
+<nav class="top-nav">
+  <a href="about.html">About</a>
+  <a href="faq.html">FAQ</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<!-- ── CENTRE CONTENT ── -->
+<div class="page">
+  <div class="centre">
+
+    <!-- top ornament glyph -->
+    <div class="top-glyph">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 2 L22 18 L38 20 L22 22 L20 38 L18 22 L2 20 L18 18 Z" stroke="#c4614a" stroke-width="0.8" fill="none" opacity="0.7"/>
+        <circle cx="20" cy="20" r="2" fill="#c4614a" opacity="0.6"/>
+      </svg>
     </div>
 
-    <div class="right">
-      <h1>SOUMYADEEP KUNDU</h1>
-      <div class="alias">aka James</div>
+    <!-- GOTHIC NAME -->
+    <div class="name-gothic">Soumyadeep Kundu</div>
+    <div class="name-sub">aka James</div>
 
-      <div class="time">
-        TIME IN INDIA — <span id="time">00:00:00 PM</span> IST
-      </div>
+    <!-- divider -->
+    <div class="divider">
+      <div class="div-line"></div>
+      <div class="div-diamond"></div>
+      <div class="div-line"></div>
+    </div>
 
-      <img src="assets/images/setup.jpg"
-     alt="study desk"
-     style="width:40%; max-width:220px;">
+    <!-- alias -->
+    <div class="alias">India</div>
 
-      <nav>
-  <a href="about.html">about</a><span class="divider">//</span>
-  <a href="faq.html">faq</a><span class="divider">//</span>
-  <a href="contact.html">contact</a>
-</nav>
-      <footer>
-        要像伊卡洛斯一样 
-      </footer>
+    <!-- live time -->
+    <div class="time-block">
+      <span class="time-label">IST</span>
+      <span class="time-val" id="time">00:00:00</span>
+      <span class="time-label">India</span>
+    </div>
+
+    <!-- nav links -->
+    <nav class="nav-row">
+      <a href="about.html">about</a>
+      <a href="faq.html">faq</a>
+      <a href="contact.html">contact</a>
+    </nav>
+
+    <!-- quote -->
+    <div class="quote">要像伊卡洛斯一样</div>
+
+    <!-- bottom ornament -->
+    <div class="bottom-glyph">
+      <svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15 2 L17 13 L28 15 L17 17 L15 28 L13 17 L2 15 L13 13 Z" stroke="#8B1A1A" stroke-width="0.8" fill="none"/>
+      </svg>
     </div>
 
   </div>
+</div>
 
+<script>
+  function tick() {
+    const t = new Intl.DateTimeFormat("en-IN", {
+      timeZone:"Asia/Kolkata",
+      hour:"2-digit", minute:"2-digit", second:"2-digit", hour12:false
+    }).format(new Date());
+    document.getElementById("time").textContent = t;
+  }
+  setInterval(tick, 1000);
+  tick();
+</script>
 </body>
 </html>
