@@ -5,147 +5,306 @@
   <title>FAQ — Soumyadeep Kundu</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cinzel:wght@400;600&family=Cormorant+Garamond:wght@300;400;500&family=Space+Mono&display=swap" rel="stylesheet">
+
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html,body{height:100%;}
+
+    body{
+      background:#000;
+      color:#e8e0d5;
+      font-family:'Cormorant Garamond', serif;
+      overflow-x:hidden;
     }
 
-    body {
-      background: #000;
-      color: #fff;
-      font-family: "Times New Roman", serif;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    /* background */
+    .bg{
+      position:fixed;
+      inset:0;
+      z-index:0;
+      background:
+      linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.92),
+        rgba(0,0,0,0.96)
+      ),
+      url('assets/images/castle.png');
+      background-size:cover;
+      background-position:center top;
     }
 
-    .container {
-      max-width: 900px;
-      width: 100%;
-      padding: 2.5rem;
+    /* grain */
+    .grain{
+      position:fixed;
+      inset:0;
+      z-index:1;
+      pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
     }
 
-    h1 {
-      text-align: center;
-      font-size: 2.8rem;
-      letter-spacing: 2px;
-      margin-bottom: 3rem;
+    /* nav */
+    .top-nav{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      z-index:10;
+      display:flex;
+      justify-content:center;
+      gap:3rem;
+      padding:1.4rem 2rem;
+      border-bottom:1px solid rgba(255,255,255,0.06);
+      background:linear-gradient(to bottom, rgba(0,0,0,0.6), transparent);
     }
 
-    .section-title {
-      font-size: 1.2rem;
-      letter-spacing: 1px;
-      margin: 2.5rem 0 1.2rem;
-      color: #ccc;
+    .top-nav a{
+      font-family:'Space Mono', monospace;
+      font-size:0.6rem;
+      letter-spacing:0.25em;
+      text-transform:uppercase;
+      text-decoration:none;
+      color:rgba(255,255,255,0.45);
+      transition:0.25s;
     }
 
-    .item {
-      margin-bottom: 1.4rem;
-      line-height: 1.7;
-      color: #ddd;
-      font-size: 1.05rem;
+    .top-nav a:hover{
+      color:#c4614a;
     }
 
-    .label {
-      color: #aaa;
-      display: block;
-      margin-bottom: 0.2rem;
+    /* page */
+    .page{
+      position:relative;
+      z-index:2;
+      width:100%;
+      min-height:100vh;
+      padding:7rem 1.5rem 4rem;
+      animation:fade 1s ease;
     }
 
-    .back {
-      display: block;
-      margin-top: 3.5rem;
-      text-align: center;
-      color: #aaa;
-      text-decoration: none;
-      font-size: 0.95rem;
-      letter-spacing: 1px;
+    @keyframes fade{
+      from{
+        opacity:0;
+        transform:translateY(10px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
     }
 
-    .back:hover {
-      opacity: 0.6;
+    .container{
+      width:100%;
+      max-width:820px;
+      margin:auto;
     }
 
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
+    h1{
+      text-align:center;
+      font-family:'Cinzel', serif;
+      font-size:clamp(2.5rem,7vw,4rem);
+      letter-spacing:0.08em;
+      margin-bottom:4rem;
+      color:#f0e7dc;
+      text-shadow:0 0 25px rgba(196,97,74,0.15);
+    }
+
+    .section{
+      margin-bottom:4rem;
+    }
+
+    .section-title{
+      font-family:'Cinzel', serif;
+      font-size:1.5rem;
+      letter-spacing:0.08em;
+      margin-bottom:2rem;
+      color:#f0e7dc;
+    }
+
+    .qa{
+      margin-bottom:2.4rem;
+    }
+
+    .question{
+      font-family:'Cinzel', serif;
+      font-size:1.05rem;
+      margin-bottom:0.7rem;
+      color:#d6c8ba;
+      letter-spacing:0.04em;
+    }
+
+    .answer{
+      color:rgba(255,255,255,0.65);
+      line-height:1.9;
+      font-size:1.02rem;
+    }
+
+    .divider{
+      width:100%;
+      height:1px;
+      margin:2rem 0;
+      background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(196,97,74,0.35),
+        transparent
+      );
+    }
+
+    .back-link{
+      margin-top:3rem;
+      display:inline-flex;
+      align-items:center;
+      gap:0.6rem;
+      text-decoration:none;
+      color:rgba(255,255,255,0.35);
+      font-family:'Space Mono', monospace;
+      font-size:0.65rem;
+      letter-spacing:0.22em;
+      text-transform:uppercase;
+      transition:0.25s;
+    }
+
+    .back-link::before{
+      content:'←';
+    }
+
+    .back-link:hover{
+      color:#c4614a;
+    }
+
+    @media(max-width:700px){
+
+      .top-nav{
+        gap:1.4rem;
+      }
+
+      .page{
+        padding:6rem 1rem 3rem;
+      }
+
+      .question{
+        font-size:0.95rem;
+      }
+
+      .answer{
+        font-size:0.96rem;
+      }
     }
   </style>
 </head>
 
 <body>
 
+<div class="bg"></div>
+<div class="grain"></div>
+
+<!-- nav -->
+<nav class="top-nav">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="faq.html">FAQ</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<!-- page -->
+<div class="page">
+
   <div class="container">
 
     <h1>FAQ</h1>
 
-    <div class="section-title">PERSONAL DETAILS</div>
+    <!-- PERSONAL -->
+    <div class="section">
 
-    <div class="item">
-      <span class="label">AGE:</span>
-      18
+      <div class="section-title">PERSONAL DETAILS</div>
+
+      <div class="qa">
+        <div class="question">AGE</div>
+        <div class="answer">18</div>
+      </div>
+
+      <div class="qa">
+        <div class="question">BIRTHDAY</div>
+        <div class="answer">prefer not to say</div>
+      </div>
+
+      <div class="qa">
+        <div class="question">WHERE ARE YOU FROM</div>
+        <div class="answer">India, Asia</div>
+      </div>
+
+      <div class="qa">
+        <div class="question">WHAT'S YOUR HEIGHT</div>
+        <div class="answer">181 cm</div>
+      </div>
+
+      <div class="qa">
+        <div class="question">WHAT ARE YOU STUDYING</div>
+        <div class="answer">
+          studying for getting into university (24.06.2025)
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="question">WHAT ARE YOU</div>
+        <div class="answer">indian</div>
+      </div>
+
+      <div class="qa">
+        <div class="question">ORIENTATION</div>
+        <div class="answer">straight</div>
+      </div>
+
+      <div class="qa">
+        <div class="question">WHAT'S YOUR MBTI</div>
+        <div class="answer">intj</div>
+      </div>
+
     </div>
 
-    <div class="item">
-      <span class="label">BIRTHDAY:</span>
-      prefer not to say
+    <div class="divider"></div>
+
+    <!-- studying -->
+    <div class="section">
+
+      <div class="section-title">STUDYING</div>
+
+      <div class="qa">
+        <div class="question">HOW DO I STUDY BETTER</div>
+        <div class="answer">
+          lots of practice. you have to approach it like learning a new skill.
+          push yourself slightly above your upper limit consistently and you will
+          get better. if you push yourself too hard you will burnout — there is a
+          balance between pushing yourself too hard and just hard enough to get
+          peak improvement. I have had a lot a lot of practice.
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="question">WHEN DO I STUDY MOSTLY</div>
+        <div class="answer">
+          for couple of past and probably in future as well I'll study most of
+          the time in my day for rearranging my life (+fitness included too) :)
+        </div>
+      </div>
+
+      <div class="qa">
+        <div class="answer">
+          thank you!!
+        </div>
+      </div>
+
     </div>
 
-    <div class="item">
-      <span class="label">WHERE ARE YOU FROM:</span>
-      India , Asia
-    </div>
-
-    <div class="item">
-      <span class="label">WHAT'S YOUR HEIGHT ?</span>
-      181 cm
-    </div>
-
-    <div class="item">
-      <span class="label">WHAT ARE YOU STUDYING ?</span>
-      studying for getting into Uni (24.06.2025)
-    </div>
-
-    <div class="item">
-      <span class="label">WHAT ARE YOU ?</span>
-      indian
-    </div>
-
-    <div class="item">
-      <span class="label">ORIENTATION:</span>
-      straight
-    </div>
-
-    <div class="item">
-      <span class="label">WHAT'S YOUR MTBI ?</span>
-      intj
-    </div>
-
-    <div class="section-title">STUDYING</div>
-
-    <div class="item">
-      <span class="label">HOW DO I STUDY BETTER ?</span>
-      lots of practice. you have to approach it like learning a new skill. push yourself slightly above your upper limit consistently and you will get better. if you push yourself too hard you will burnout- there is a balance of pushing yourself too hard and just hard enough to get peak improvement. I have had a lot a lot of practice.
-    </div>
-
-    <div class="item">
-      <span class="label">WHEN DO I STUDY MOSTLY ?</span>
-      for couple of past and probably in future as well I'll study most of the time in my day for rearranging my life (+fitness included too) :)
-    </div>
-
-    <div class="item">
-      thank you!!
-    </div>
-
-    <a href="index.html" class="back">← back</a>
+    <a href="index.html" class="back-link">back</a>
 
   </div>
+
+</div>
 
 </body>
 </html>
