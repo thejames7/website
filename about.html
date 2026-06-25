@@ -1,3 +1,5 @@
+bash
+cat > /mnt/user-data/outputs/about.html << 'HTMLEOF'
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +21,6 @@
       overflow-x: hidden;
     }
 
-    /* ── CASTLE BG ── */
     .bg {
       position: fixed; inset: 0; z-index: 0;
       background-image: url('assets/images/castle.png');
@@ -37,13 +38,11 @@
       );
     }
 
-    /* ── GRAIN ── */
     .grain {
       position:fixed; inset:0; z-index:1; pointer-events:none;
       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
     }
 
-    /* ── TOP NAV ── */
     .top-nav {
       position: fixed;
       top:0; left:0; right:0; z-index:10;
@@ -59,10 +58,6 @@
     }
     .top-nav a:hover { color:#c4614a; }
 
-    /* ══════════════════════════════════════
-       GOTHIC SIDE ORNAMENTS
-       Inspired by the crimson angelic style
-    ══════════════════════════════════════ */
     .orn-left, .orn-right {
       position: fixed;
       top: 50%; transform: translateY(-50%);
@@ -72,7 +67,6 @@
     .orn-right { right: 0; transform: translateY(-50%) scaleX(-1); }
     .orn-left svg, .orn-right svg { width:100%; height:auto; display:block; }
 
-    /* ── PAGE ── */
     .page {
       position: relative; z-index: 2;
       min-height: 100vh;
@@ -86,18 +80,15 @@
       to   { opacity:1; transform:translateY(0); }
     }
 
-    /* ── CENTRE CONTENT ── */
     .centre {
       text-align: center;
       display: flex; flex-direction: column; align-items: center;
       max-width: 660px; width: 100%;
     }
 
-    /* top ornament glyph */
     .top-glyph { margin-bottom:1.6rem; opacity:0.55; }
     .top-glyph svg { width:44px; height:44px; }
 
-    /* ── HEADING ── */
     h1 {
       font-family: 'UnifrakturMaguntia', cursive;
       font-size: clamp(2.4rem, 7vw, 4.5rem);
@@ -108,7 +99,6 @@
       line-height: 1;
     }
 
-    /* divider */
     .divider {
       display:flex; align-items:center; gap:1rem;
       width:100%; max-width:280px; margin: 1.2rem auto 1.8rem;
@@ -116,21 +106,22 @@
     .div-line { flex:1; height:1px; background:linear-gradient(90deg,transparent,rgba(196,97,74,0.45),transparent); }
     .div-diamond { width:5px; height:5px; background:rgba(196,97,74,0.65); transform:rotate(45deg); }
 
-    /* ── PHOTO ── */
+    /* ── PHOTO — landscape fix ── */
     .photo-wrap {
       position: relative;
       margin-bottom: 2.2rem;
+      width: 100%;
+      max-width: 480px;          /* landscape width */
     }
     .photo-wrap img {
-      width: 180px;
-      height: 220px;
+      width: 100%;
+      height: 300px;             /* landscape height */
       object-fit: cover;
       object-position: center top;
       display: block;
       filter: grayscale(100%) contrast(110%) brightness(0.8);
       border: 1px solid rgba(255,255,255,0.1);
     }
-    /* double frame */
     .photo-wrap::before {
       content:''; position:absolute;
       inset:-5px;
@@ -144,7 +135,6 @@
       pointer-events:none;
     }
 
-    /* ── BIO TEXT ── */
     .bio-block {
       display: flex; flex-direction: column; gap: 1.3rem;
       margin-bottom: 2.5rem;
@@ -157,7 +147,6 @@
       letter-spacing: 0.02em;
     }
 
-    /* ── BACK LINK ── */
     .back-link {
       font-family: 'Space Mono', monospace;
       font-size: 0.62rem;
@@ -172,16 +161,15 @@
     .back-link:hover { color: #c4614a; }
     .back-link::before { content:'←'; font-size:0.8rem; }
 
-    /* bottom glyph */
     .bottom-glyph { margin-top:1.8rem; opacity:0.3; }
     .bottom-glyph svg { width:28px; height:28px; }
 
-    /* ── MOBILE ── */
     @media(max-width:600px){
       .orn-left,.orn-right { width:36px; opacity:0.4; }
       .top-nav { gap:1.5rem; }
       .page { padding:5rem 0.5rem 3rem; }
-      .photo-wrap img { width:150px; height:185px; }
+      .photo-wrap { max-width: 100%; }
+      .photo-wrap img { height: 200px; }
     }
     @media(prefers-reduced-motion:reduce){
       .page { animation:none; }
@@ -193,111 +181,59 @@
 <div class="bg"></div>
 <div class="grain"></div>
 
-<!-- ════════════════════════════════════════
-     LEFT ORNAMENT
-     Style: crimson angelic/demonic filigree
-     with spear-like spine, wing curls, eye motifs
-════════════════════════════════════════ -->
 <div class="orn-left">
   <svg viewBox="0 0 80 520" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- main vertical spear spine -->
     <line x1="40" y1="0" x2="40" y2="520" stroke="#6B1010" stroke-width="0.8" opacity="0.7"/>
-
-    <!-- TOP SPEAR TIP — sharp gothic point -->
     <path d="M40 0 L35 18 L38 14 L40 8 L42 14 L45 18 Z" fill="#8B1A1A" opacity="0.8"/>
     <path d="M40 8 L37 22 L40 18 L43 22 Z" fill="#c4614a" opacity="0.5"/>
-
-    <!-- small crossbar ticks up top -->
     <line x1="33" y1="28" x2="47" y2="28" stroke="#c4614a" stroke-width="0.7" opacity="0.5"/>
     <line x1="35" y1="34" x2="45" y2="34" stroke="#c4614a" stroke-width="0.5" opacity="0.35"/>
-
-    <!-- UPPER WING CURL — left -->
-    <path d="M40 70 C30 62, 14 68, 10 82 C6 96, 16 106, 26 104 C34 102, 38 96, 40 92"
-          stroke="#c4614a" stroke-width="1.1" fill="none" opacity="0.65"/>
-    <!-- curl tip flourish -->
+    <path d="M40 70 C30 62, 14 68, 10 82 C6 96, 16 106, 26 104 C34 102, 38 96, 40 92" stroke="#c4614a" stroke-width="1.1" fill="none" opacity="0.65"/>
     <path d="M10 82 C8 76, 12 70, 16 72" stroke="#8B1A1A" stroke-width="0.8" fill="none" opacity="0.5"/>
-
-    <!-- UPPER WING CURL — right -->
-    <path d="M40 70 C50 62, 66 68, 70 82 C74 96, 64 106, 54 104 C46 102, 42 96, 40 92"
-          stroke="#c4614a" stroke-width="1.1" fill="none" opacity="0.65"/>
+    <path d="M40 70 C50 62, 66 68, 70 82 C74 96, 64 106, 54 104 C46 102, 42 96, 40 92" stroke="#c4614a" stroke-width="1.1" fill="none" opacity="0.65"/>
     <path d="M70 82 C72 76, 68 70, 64 72" stroke="#8B1A1A" stroke-width="0.8" fill="none" opacity="0.5"/>
-
-    <!-- EYE MOTIF at upper wing junction -->
     <ellipse cx="40" cy="92" rx="5" ry="3" stroke="#c4614a" stroke-width="0.8" fill="none" opacity="0.6"/>
     <circle cx="40" cy="92" r="1.5" fill="#c4614a" opacity="0.5"/>
-    <!-- eye lashes -->
     <line x1="40" y1="86" x2="40" y2="82" stroke="#c4614a" stroke-width="0.6" opacity="0.4"/>
     <line x1="40" y1="98" x2="40" y2="102" stroke="#c4614a" stroke-width="0.6" opacity="0.4"/>
-
-    <!-- secondary small curl pair -->
-    <path d="M40 118 C32 114, 22 120, 20 130 C18 140, 26 146, 34 143 C38 141, 40 138, 40 135"
-          stroke="#8B1A1A" stroke-width="0.9" fill="none" opacity="0.45"/>
-    <path d="M40 118 C48 114, 58 120, 60 130 C62 140, 54 146, 46 143 C42 141, 40 138, 40 135"
-          stroke="#8B1A1A" stroke-width="0.9" fill="none" opacity="0.45"/>
-
-    <!-- diamond cross ornament -->
+    <path d="M40 118 C32 114, 22 120, 20 130 C18 140, 26 146, 34 143 C38 141, 40 138, 40 135" stroke="#8B1A1A" stroke-width="0.9" fill="none" opacity="0.45"/>
+    <path d="M40 118 C48 114, 58 120, 60 130 C62 140, 54 146, 46 143 C42 141, 40 138, 40 135" stroke="#8B1A1A" stroke-width="0.9" fill="none" opacity="0.45"/>
     <path d="M40 158 L34 168 L40 178 L46 168 Z" stroke="#c4614a" stroke-width="0.8" fill="none" opacity="0.6"/>
     <path d="M40 158 L40 148" stroke="#c4614a" stroke-width="0.7" opacity="0.4"/>
     <path d="M40 178 L40 188" stroke="#c4614a" stroke-width="0.7" opacity="0.4"/>
     <line x1="28" y1="168" x2="52" y2="168" stroke="#c4614a" stroke-width="0.6" opacity="0.35"/>
     <circle cx="40" cy="168" r="2" fill="#8B1A1A" opacity="0.6"/>
-
-    <!-- MID LARGE WING — like angel/demon wings spread -->
-    <path d="M40 230 C24 218, 4 228, 2 248 C0 264, 12 275, 24 272 C32 270, 38 263, 40 257"
-          stroke="#c4614a" stroke-width="1.3" fill="none" opacity="0.6"/>
+    <path d="M40 230 C24 218, 4 228, 2 248 C0 264, 12 275, 24 272 C32 270, 38 263, 40 257" stroke="#c4614a" stroke-width="1.3" fill="none" opacity="0.6"/>
     <path d="M2 248 C-2 238, 4 226, 10 230" stroke="#8B1A1A" stroke-width="0.9" fill="none" opacity="0.5"/>
-    <!-- inner wing vein -->
     <path d="M40 240 C30 236, 18 240, 14 250" stroke="#6B1010" stroke-width="0.7" fill="none" opacity="0.4"/>
-
-    <path d="M40 230 C56 218, 76 228, 78 248 C80 264, 68 275, 56 272 C48 270, 42 263, 40 257"
-          stroke="#c4614a" stroke-width="1.3" fill="none" opacity="0.6"/>
+    <path d="M40 230 C56 218, 76 228, 78 248 C80 264, 68 275, 56 272 C48 270, 42 263, 40 257" stroke="#c4614a" stroke-width="1.3" fill="none" opacity="0.6"/>
     <path d="M78 248 C82 238, 76 226, 70 230" stroke="#8B1A1A" stroke-width="0.9" fill="none" opacity="0.5"/>
     <path d="M40 240 C50 236, 62 240, 66 250" stroke="#6B1010" stroke-width="0.7" fill="none" opacity="0.4"/>
-
-    <!-- centre eye at mid-wing -->
     <ellipse cx="40" cy="257" rx="6" ry="3.5" stroke="#c4614a" stroke-width="0.9" fill="none" opacity="0.65"/>
     <ellipse cx="40" cy="257" rx="2.5" ry="2.5" fill="none" stroke="#8B1A1A" stroke-width="0.7" opacity="0.5"/>
     <circle cx="40" cy="257" r="1" fill="#c4614a" opacity="0.7"/>
     <line x1="40" y1="250" x2="40" y2="245" stroke="#c4614a" stroke-width="0.6" opacity="0.4"/>
     <line x1="40" y1="264" x2="40" y2="269" stroke="#c4614a" stroke-width="0.6" opacity="0.4"/>
-
-    <!-- fine calligraphic side swirls (like the script in ref image) -->
-    <path d="M40 290 C28 287, 16 294, 14 304 C12 312, 20 318, 30 315 C36 313, 40 308, 40 304"
-          stroke="#6B1010" stroke-width="0.8" fill="none" opacity="0.4"/>
-    <path d="M40 290 C52 287, 64 294, 66 304 C68 312, 60 318, 50 315 C44 313, 40 308, 40 304"
-          stroke="#6B1010" stroke-width="0.8" fill="none" opacity="0.4"/>
-
-    <!-- lower diamond cross -->
+    <path d="M40 290 C28 287, 16 294, 14 304 C12 312, 20 318, 30 315 C36 313, 40 308, 40 304" stroke="#6B1010" stroke-width="0.8" fill="none" opacity="0.4"/>
+    <path d="M40 290 C52 287, 64 294, 66 304 C68 312, 60 318, 50 315 C44 313, 40 308, 40 304" stroke="#6B1010" stroke-width="0.8" fill="none" opacity="0.4"/>
     <path d="M40 334 L34 344 L40 354 L46 344 Z" stroke="#8B1A1A" stroke-width="0.8" fill="none" opacity="0.5"/>
     <line x1="28" y1="344" x2="52" y2="344" stroke="#8B1A1A" stroke-width="0.6" opacity="0.3"/>
     <circle cx="40" cy="344" r="1.8" fill="#6B1010" opacity="0.55"/>
     <path d="M40 354 L40 365" stroke="#8B1A1A" stroke-width="0.7" opacity="0.35"/>
-
-    <!-- lower small wing pair -->
-    <path d="M40 390 C28 382, 14 388, 12 400 C10 412, 22 418, 32 414 C38 411, 40 406, 40 402"
-          stroke="#6B1010" stroke-width="1" fill="none" opacity="0.4"/>
-    <path d="M40 390 C52 382, 66 388, 68 400 C70 412, 58 418, 48 414 C42 411, 40 406, 40 402"
-          stroke="#6B1010" stroke-width="1" fill="none" opacity="0.4"/>
-
-    <!-- BOTTOM INVERTED SPEAR TIP -->
+    <path d="M40 390 C28 382, 14 388, 12 400 C10 412, 22 418, 32 414 C38 411, 40 406, 40 402" stroke="#6B1010" stroke-width="1" fill="none" opacity="0.4"/>
+    <path d="M40 390 C52 382, 66 388, 68 400 C70 412, 58 418, 48 414 C42 411, 40 406, 40 402" stroke="#6B1010" stroke-width="1" fill="none" opacity="0.4"/>
     <path d="M40 520 L35 502 L38 506 L40 512 L42 506 L45 502 Z" fill="#8B1A1A" opacity="0.7"/>
     <path d="M40 512 L37 498 L40 502 L43 498 Z" fill="#c4614a" opacity="0.4"/>
     <line x1="33" y1="492" x2="47" y2="492" stroke="#c4614a" stroke-width="0.7" opacity="0.4"/>
-
-    <!-- scattered fine horizontal calligraphy lines (like the reference script) -->
     <line x1="20" y1="198" x2="60" y2="198" stroke="#c4614a" stroke-width="0.5" opacity="0.25"/>
     <line x1="24" y1="204" x2="56" y2="204" stroke="#c4614a" stroke-width="0.4" opacity="0.18"/>
     <line x1="18" y1="450" x2="62" y2="450" stroke="#6B1010" stroke-width="0.5" opacity="0.22"/>
     <line x1="22" y1="456" x2="58" y2="456" stroke="#6B1010" stroke-width="0.4" opacity="0.16"/>
     <line x1="26" y1="462" x2="54" y2="462" stroke="#6B1010" stroke-width="0.4" opacity="0.13"/>
-
-    <!-- tiny starburst at 1/4 mark -->
-    <path d="M40 128 L41.5 132 L46 130 L42 133 L44 138 L40 135 L36 138 L38 133 L34 130 L38.5 132 Z"
-          stroke="#c4614a" stroke-width="0.6" fill="none" opacity="0.4"/>
+    <path d="M40 128 L41.5 132 L46 130 L42 133 L44 138 L40 135 L36 138 L38 133 L34 130 L38.5 132 Z" stroke="#c4614a" stroke-width="0.6" fill="none" opacity="0.4"/>
   </svg>
 </div>
 
-<!-- RIGHT ornament (mirrored) -->
 <div class="orn-right">
   <svg viewBox="0 0 80 520" fill="none" xmlns="http://www.w3.org/2000/svg">
     <line x1="40" y1="0" x2="40" y2="520" stroke="#6B1010" stroke-width="0.8" opacity="0.7"/>
@@ -351,7 +287,6 @@
   </svg>
 </div>
 
-<!-- ── TOP NAV ── -->
 <nav class="top-nav">
   <a href="index.html">Home</a>
   <a href="about.html">About</a>
@@ -359,11 +294,9 @@
   <a href="contact.html">Contact</a>
 </nav>
 
-<!-- ── PAGE ── -->
 <div class="page">
   <div class="centre">
 
-    <!-- top ornament -->
     <div class="top-glyph">
       <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M22 2 L24 20 L42 22 L24 24 L22 42 L20 24 L2 22 L20 20 Z"
@@ -373,33 +306,25 @@
       </svg>
     </div>
 
-    <!-- heading -->
     <h1>About</h1>
 
-    <!-- divider -->
     <div class="divider">
       <div class="div-line"></div>
       <div class="div-diamond"></div>
       <div class="div-line"></div>
     </div>
 
-    <!-- photo -->
+    <!-- LANDSCAPE PHOTO -->
     <div class="photo-wrap">
-      <!--
-        IMAGE: assets/images/me.jpg
-        Your photo — already set up as me.jpg
-      -->
       <img src="assets/images/me.jpg" alt="Soumyadeep Kundu">
     </div>
 
-    <!-- divider after photo -->
     <div class="divider" style="margin-top:1.8rem;">
       <div class="div-line"></div>
       <div class="div-diamond"></div>
       <div class="div-line"></div>
     </div>
 
-    <!-- bio content — same as original -->
     <div class="bio-block">
       <p>
         Soumyadeep Kundu (aka James) is a high school passout student based in India.
@@ -418,10 +343,8 @@
       </p>
     </div>
 
-    <!-- back link -->
     <a class="back-link" href="index.html">back</a>
 
-    <!-- bottom glyph -->
     <div class="bottom-glyph">
       <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M14 2 L15.5 12.5 L26 14 L15.5 15.5 L14 26 L12.5 15.5 L2 14 L12.5 12.5 Z"
@@ -434,3 +357,4 @@
 
 </body>
 </html>
+HTMLEOF
